@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaxQuelloMax - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-content">
+        <section class="hero">
+            <h1>MaxQuelloMax</h1>
+            <p>Helloo. this page it's just some projects i've been through to try my skills in this world :)</p>
+        </section>
+
+        <section class="projects-section">
+            <h2 class="section-title">The Projects</h2>
+
+            <!-- Project 1: Web Application -->
+            <div class="project">
+                <div class="project-content">
+                    <div class="project-text">
+                        <h3>Advanced Discord Bot (MirageMC)</h3>
+                        <p>It was never finisdhed but it was a all ass discord bot connected to a website and a minecraft server</p>
+                        <p>it was meant to have automatizzations, security with ip bans, global from all platforms of the sevrer and more.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">html</span>
+                            <span class="tech-tag">css</span>
+                        </div>
+                    </div>
+                    <div class="project-media miragemc-container">
+                        <img src="images/Miragemc.png" alt="MirageMC Discord Bot Screenshot" class="project-image-real">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Mobile Game -->
+            <div class="project">
+                <div class="project-content">
+                    <div class="project-text">
+                        <h3>Roblox Game</h3>
+                        <p>I'm working on a secret single player game that utilizes a lot of shaders and video effects that can be achived with Roblox Studio.</p>
+                        <p>It's a Horror game based of all the backdoors and virus founded in models/scripts and in general all Roblox.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Lua</span>
+                            <span class="tech-tag">Roblox Studio</span>
+                            <span class="tech-tag">Blender</span>
+                        </div>
+                    </div>
+                    <div class="project-media">
+                        <div class="demo-content game-demo">
+                            <div class="demo-text">Coming Soon</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: AI/ML Project -->
+            <div class="project">
+                <div class="project-content">
+                    <div class="project-text">
+                        <h3>AntiCheats</h3>
+                        <p>if you know <a href="https://www.echo.ac" class="anticheat-link" target="_blank">echo.ac</a> or <a href="https://anticheat.ac" class="anticheat-link" target="_blank">anticheat.ac</a> you know how they work, i wanted to make something similar for some games that really needed it.</p>
+                        <p>The latest AC program i did is shark.ac, a Roblox cheat finder for internal an externals ones.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">Discord</span>
+                            <span class="tech-tag">js</span>
+                            <span class="tech-tag">Memory Regions</span>
+                        </div>
+                    </div>
+                    <div class="project-media shark-container">
+                        <img src="images/Shark.png" alt="Shark.ac AntiCheat Screenshot" class="project-image-real2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: Design System -->
+            <div class="project">
+                <div class="project-content">
+                    <div class="project-text">
+                        <h3>Animations</h3>
+                        <p>I tires sfm but coudn't really anymate so i did still images, then i found out about blender and it all started there.</p>
+                        <p>I mostly still do blender but some times i hop on roblox studio Moon animator or minecraft emotes animations.</p>
+                        <p>NOTE, not my best animation but my latest in the video</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Blender</span>
+                            <span class="tech-tag">Minecraft</span>
+                            <span class="tech-tag">Roblox Studio</span>
+                        </div>
+                    </div>
+                            <div class="project-media blender-container">
+                                <video src="videos/blender.mp4" class="project-video" autoplay loop muted playsinline> class="project-image-real3</video>
+                            </div>
+                </div>
+            </div>
+
+            <!-- Project 5: Data Visualization -->
+            <div class="project">
+                <div class="project-content">
+                    <div class="project-text">
+                        <h3>Cheats/Cracks/Bypasses</h3>
+                        <p>The reason i'm doing/wanna do this type off stuff for some games/programs is for money or just to see "can i do it or not".</p>
+                        <p>I'ts just a way to make my Reverse Engineering skills better because they're very poor.</p>
+                        <p>I still didn't sold anything or get any type of money for it and for now it's ok like this</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">C++</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Cheat Engine</span>
+                            <span class="tech-tag">dnspy</span>
+                            <span class="tech-tag">dgb</span>
+                        </div>
+                    </div>
+                        <div class="project-media cheats">
+                            <img src="images/Cheats.png" alt="cs2 external test" class="project-image-real4">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize scroll animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollAnimations();
+        });
+
+        // Smooth scroll animations for projects
+        function initScrollAnimations() {
+            const projects = document.querySelectorAll('.project');
+            
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            projects.forEach(project => {
+                observer.observe(project);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elena Bypass</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background-color: #0c0c0e;
+            color: white;
+            font-family: "Consolas", monospace;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        p, h1, h2, h3, h4, h5, h6, span, div, a, li, td, th {
+            color: white;
+            font-family: "Consolas", monospace;
+        }
+
+        /* Navigation */
+        nav {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem 1.5rem;
+            background: #0c0c0e;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(45deg, #7602e2, #330063);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon-inner {
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #7602e2, #330063);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #7602e2;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-icon {
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            color: #7602e2;
+        }
+
+        .dashboard-btn {
+            background: linear-gradient(45deg, #5b8def, #4a7ad9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dashboard-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(91, 141, 239, 0.4);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb span {
+            color: #666;
+        }
+
+        .breadcrumb span:last-child {
+            color: #ccc;
+        }
+
+        /* Product Section */
+        .product-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        /* Product Image */
+        .product-showcase {
+            background: rgba(20,20,25,1);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .showcase-image {
+            height: 400px;
+            background: linear-gradient(135deg, #1a1d24 0%, #2a2d34 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-image img {
+            width: auto;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .showcase-btn {
+            background: rgba(30,30,35,1);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+            padding: 1rem;
+            width: 100%;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .showcase-btn:hover {
+            background: rgba(40,40,45,1);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        /* Variants Section */
+        .variants-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .variants-label {
+            font-size: 0.875rem;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .variant-option {
+            background: rgba(20,20,25,1);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .variant-option:hover {
+            border-color: rgba(91, 141, 239, 0.5);
+            background: rgba(30,30,35,1);
+        }
+
+        .variant-option.selected {
+            border-color: #5b8def;
+            background: rgba(91, 141, 239, 0.1);
+        }
+
+        .variant-name {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .variant-price {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .buy-now-btn {
+            flex: 1;
+            background: linear-gradient(45deg, #5b8def, #4a7ad9);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .buy-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(91, 141, 239, 0.4);
+        }
+
+        .add-to-cart-btn {
+            background: rgba(30,30,35,1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart-btn:hover {
+            background: rgba(40,40,45,1);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Requirements Section */
+        .requirements-section {
+            margin-top: 4rem;
+        }
+
+        .requirements-title {
+            font-size: 2rem;
+            font-weight: 700; /* make requirement values bold */
+            margin-bottom: 2rem;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .requirement-card {
+            background: rgba(20,20,25,1);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-card:hover {
+            border-color: rgba(118, 2, 226, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .requirement-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .requirement-value {
+            font-size: 1rem;
+            font-weight: 700; /* bold */
+            color: white;
+        }
+
+        /* Buy modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: none; /* shown via JS */
+            align-items: center;
+            justify-content: center;
+            z-index: 1200;
+        }
+
+        .modal {
+            background: linear-gradient(180deg,#0c0c0e,#111216);
+            color: white;
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            width: min(520px, 92%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            position: relative;
+            text-align: center;
+            font-family: "Consolas", monospace;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: transparent;
+            border: none;
+            color: #ccc;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .modal p {
+            margin: 1rem 0 0;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .product-section {
+                grid-template-columns: 1fr;
+            }
+
+            .requirements-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+   <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    </div>
+                    <span class="logo-text">MaxQuelloMax</span>
+                </div>
+                <div class="nav-links">
+                    <a href="/products">Home</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <span>MaxQuelloMax</span>
+            <span>/</span>
+            <span>Product</span>
+            <span>/</span>
+            <span>Elena Bypass</span>
+        </div>
+
+        <!-- Product Title -->
+        <h1 class="product-title">Elena Bypass</h1>
+
+        <!-- Product Section -->
+        <div class="product-section">
+            <!-- Product Showcase -->
+            <div class="product-showcase">
+                <div class="showcase-image">
+                    <!-- Product image: try product-specific image files in sensible relative locations.
+                         We intentionally avoid the inline data-URI fallback so the real product image is used when present. -->
+                    <img id="product-img" src="" alt="Elena Bypass" style="display:none">
+                </div>
+                <button class="showcase-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                        <line x1="7" y1="2" x2="7" y2="22"></line>
+                        <line x1="17" y1="2" x2="17" y2="22"></line>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="2" y1="7" x2="7" y2="7"></line>
+                        <line x1="2" y1="17" x2="7" y2="17"></line>
+                        <line x1="17" y1="17" x2="22" y2="17"></line>
+                        <line x1="17" y1="7" x2="22" y2="7"></line>
+                    </svg>
+                    Show Showcase
+                </button>
+            </div>
+
+            <!-- Variants -->
+            <div class="variants-section">
+                <div class="variants-label">Variants:</div>
+                
+                <div class="variant-option selected" onclick="selectVariant(this, '€4.99')">
+                    <span class="variant-name">Lifetime</span>
+                    <span class="variant-price">€49.99</span>
+                </div>
+
+                <div class="variant-option" onclick="selectVariant(this, '€24.99')">
+                    <span class="variant-name">The method (the all explanaition)</span>
+                    <span class="variant-price">€99.99</span>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="buy-now-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                        Buy Now
+                    </button>
+                    <div class="add-to-cart-btn">
+
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        Only 10 avaliable
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requirements Section -->
+        <div class="requirements-section">
+            <h2 class="requirements-title">Requirements</h2>
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <div class="requirement-label">Operating System</div>
+                    <div class="requirement-value">Windows 10 & 11 (All Versions)</div>
+                </div>
+
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                            <rect x="9" y="9" width="6" height="6"></rect>
+                            <line x1="9" y1="1" x2="9" y2="4"></line>
+                            <line x1="15" y1="1" x2="15" y2="4"></line>
+                            <line x1="9" y1="20" x2="9" y2="23"></line>
+                            <line x1="15" y1="20" x2="15" y2="23"></line>
+                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                            <line x1="20" y1="14" x2="23" y2="14"></line>
+                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                            <line x1="1" y1="14" x2="4" y2="14"></line>
+                        </svg>
+                    </div>
+                    <div class="requirement-label">Processors</div>
+                    <div class="requirement-value">AMD & Intel</div>
+                </div>
+
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <!-- Shield outline -->
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                stroke="white"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                fill="none"/>
+                          
+                          <!-- Exclamation mark -->
+                          <line x1="12" y1="8" x2="12" y2="13"
+                                stroke="white"
+                                stroke-width="2"
+                                stroke-linecap="round"/>
+                          <circle cx="12" cy="16" r="0.5"
+                                  fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="requirement-label">Anti-Cheat</div>
+                    <div class="requirement-value">SCPS-AC</div>
+                </div>
+
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="12" x2="18" y2="12"></line>
+                            <line x1="6" y1="12" x2="2" y2="12"></line>
+                            <line x1="12" y1="6" x2="12" y2="2"></line>
+                            <line x1="12" y1="22" x2="12" y2="18"></line>
+                            <path d="M16 16a4 4 0 0 1-8 0c0-4 4-8 4-8s4 4 4 8z"></path>
+                        </svg>
+                    </div>
+                    <div class="requirement-label">Game Mode</div>
+                    <div class="requirement-value">Borderless & Windowed</div>
+                </div>
+
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                    </div>
+                    <div class="requirement-label">Spoofer Included</div>
+                    <div class="requirement-value">No</div>
+                </div>
+
+                <div class="requirement-card">
+                    <div class="requirement-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                        </svg>
+                    </div>
+                    <div class="requirement-label">Platform</div>
+                    <div class="requirement-value">Steam</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="buy-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="buy-modal-title">
+            <button class="modal-close" aria-label="Close">×</button>
+            <p>dm me i don't have payment system</p>
+        </div>
+    </div>
+
+    <script>
+        // Try several relative paths to find the product image. Stops when a valid image is found.
+        (function loadProductImage() {
+            const img = document.getElementById('product-img');
+            if (!img) return;
+
+            const fileName = 'elena-bypass.png';
+            const tryPaths = [
+                `images/${fileName}`,                // product folder images/
+                `../images/${fileName}`,             // products/images
+                `../../images/${fileName}`,          // shared images at root
+                `/images/${fileName}`,               // absolute site images
+                `/products/elenabypass/images/${fileName}` // explicit product images path
+            ];
+
+            let attempt = 0;
+            function tryNext() {
+                if (attempt >= tryPaths.length) {
+                    // No image found — leave the element empty (no data URI fallback)
+                    img.style.display = 'none';
+                    return;
+                }
+
+                const path = tryPaths[attempt++];
+                img.onerror = tryNext;
+                img.onload = function() {
+                    // found and loaded — ensure it's visible
+                    img.style.display = '';
+                };
+                img.src = path;
+            }
+
+            tryNext();
+        })();
+
+        function selectVariant(element, price) {
+            // Remove selected class from all variants
+            document.querySelectorAll('.variant-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked variant
+            element.classList.add('selected');
+        }
+
+        // Modal behaviour (reusable for Buy Now and Showcase)
+        (function() {
+            const buyBtn = document.querySelector('.buy-now-btn');
+            const showcaseBtn = document.querySelector('.showcase-btn');
+            const modal = document.getElementById('buy-modal');
+            if (!modal) return;
+            const closeBtn = modal.querySelector('.modal-close');
+            const titleEl = modal.querySelector('h3');
+            const msgEl = modal.querySelector('p');
+
+            function showModalWith(title, message) {
+                titleEl && (titleEl.textContent = title);
+                msgEl && (msgEl.textContent = message);
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+                closeBtn && closeBtn.focus();
+            }
+
+            function hideModal() {
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+                // return focus to primary control when closing
+                if (buyBtn) buyBtn.focus();
+                else if (showcaseBtn) showcaseBtn.focus();
+            }
+
+            if (buyBtn) {
+                buyBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showModalWith('Contact', "dm me i don't have payment system");
+                });
+            }
+
+            if (showcaseBtn) {
+                showcaseBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showModalWith('Showcase', 'video not ready yet');
+                });
+            }
+
+            closeBtn && closeBtn.addEventListener('click', hideModal);
+
+            // click outside modal to close
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) hideModal();
+            });
+
+            // ESC to close
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.style.display === 'flex') hideModal();
+            });
+        })();
+    </script>
+</body>
+</html>

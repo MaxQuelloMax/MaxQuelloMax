@@ -1,0 +1,520 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visuals.gg - Status</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            background-color: rgba(12,12,14,1) !important;
+            color: white;
+            font-family: "Consolas", monospace;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        p, h1, h2, h3, h4, h5, h6, span, div, a, li, td, th {
+            color: white !important;
+            font-family: "Consolas", monospace;
+        }
+        
+        nav {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem 1.5rem;
+            background: rgba(12,12,14,1);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(45deg, #7602e2, #330063);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon-inner {
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #7602e2, #330063);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #7602e2;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-icon {
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            color: #7602e2;
+        }
+
+        .dashboard-btn {
+            background: linear-gradient(45deg, #7602e2, #330063);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dashboard-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(118, 2, 226, 0.4);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #7602e2, #330063);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .page-subtitle {
+            color: #ccc;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Game Section */
+        .game-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s ease-out 0.8s forwards;
+        }
+
+        .game-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: rgba(20,20,25,1);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.9s; }
+        .product-card:nth-child(2) { animation-delay: 1s; }
+        .product-card:nth-child(3) { animation-delay: 1.1s; }
+        .product-card:nth-child(4) { animation-delay: 1.2s; }
+        .product-card:nth-child(5) { animation-delay: 1.3s; }
+        .product-card:nth-child(6) { animation-delay: 1.4s; }
+        .product-card:nth-child(7) { animation-delay: 1.5s; }
+        .product-card:nth-child(8) { animation-delay: 1.6s; }
+        .product-card:nth-child(9) { animation-delay: 1.7s; }
+        .product-card:nth-child(10) { animation-delay: 1.8s; }
+
+        .product-card:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 10px 30px rgba(118, 2, 226, 0.3);
+            border-color: rgba(118, 2, 226, 0.5);
+        }
+
+        /* Make entire card clickable when wrapped in an anchor */
+        .product-link {
+            display: block; /* make anchor fill the card */
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        .product-image {
+            position: relative;
+            height: 192px;
+            background: linear-gradient(180deg, #4a5568 0%, #1a1d24 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(118, 2, 226, 0.1), transparent);
+            animation: shimmer 4s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .product-info {
+            padding: 1rem;
+            background: rgba(15,15,18,1);
+        }
+
+        .product-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-name {
+            color: white;
+            font-weight: 500;
+        }
+
+        .product-badge {
+            background: rgba(255,255,255,0.1);
+            color: #ccc;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .product-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-label {
+            color: #ccc;
+            font-size: 0.875rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .status-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Status Colors */
+        .status-undetected .status-dot {
+            background: #22c55e;
+            box-shadow: 0 0 12px #22c55e;
+        }
+
+        .status-undetected .status-text {
+            color: #22c55e;
+        }
+
+        .status-testing .status-dot {
+            background: #3b82f6;
+            box-shadow: 0 0 12px #3b82f6;
+        }
+
+        .status-testing .status-text {
+            color: #3b82f6;
+        }
+
+        .status-updating .status-dot {
+            background: #eab308;
+            box-shadow: 0 0 12px #eab308;
+        }
+
+        .status-updating .status-text {
+            color: #eab308;
+        }
+
+        .status-detected .status-dot {
+            background: #ef4444;
+            box-shadow: 0 0 12px #ef4444;
+        }
+
+        .status-detected .status-text {
+            color: #ef4444;
+        }
+
+        /* Product Name Colors */
+        .color-purple { 
+            color: #7602e2;
+            text-shadow: 0 0 10px rgba(118, 2, 226, 0.5);
+        }
+        .color-pink { 
+            color: #ec4899;
+            text-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+        .color-gray { 
+            color: #9ca3af;
+        }
+        .color-red { 
+            color: #ef4444;
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+        .color-green { 
+            color: #22c55e;
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+        .color-blue { 
+            color: #60a5fa;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+
+        /* Animation */
+        @keyframes pulse-glow {
+            0%, 100% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.6;
+                transform: scale(1.3);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .game-title {
+                font-size: 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+
+            .product-image {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+   <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    </div>
+                    <span class="logo-text">MaxQuelloMax</span>
+                </div>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="container">
+        
+        <h1 class="page-title">Products</h1>
+        <p class="page-subtitle">Projects i could sell</p>
+
+        
+        <div class="game-section">
+            <h2 class="game-title">SCP Secret Laboratory</h2>
+            <div class="products-grid" id="scpsls-products"></div>
+        </div>
+
+        
+        <div class="game-section">
+            <h2 class="game-title">Other</h2>
+            <div class="products-grid" id="fn-products"></div>
+        </div>
+    </div>
+
+    <script>
+        const products = {
+            scpsls: [
+                { name: 'Elena Bypass', status: 'undetected', badge: 'SCPSL', color: 'purple', link: '/products/elenabypass' },
+                { name: 'ElenaEX', status: 'testing', badge: 'SCPSL', color: 'purple' },
+                { name: 'Elena Internal', status: 'testing', badge: 'SCPSL', color: 'pink' },
+            ],
+            fn: [
+                { name: 'Elena Spoof', status: 'testing', badge: 'Other', color: 'blue' }
+            ]
+        };
+
+        const statusLabels = {
+            undetected: 'Undetected',
+            testing: 'Testing',
+            updating: 'Updating',
+            detected: 'Detected'
+        };
+
+        function createProductCard(product) {
+            const imageName = product.name.toLowerCase().replace(/\s+/g, '-');
+            const card = `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/${imageName}.png" alt="${product.name}" onerror="this.style.display='none'">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-header">
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-badge">${product.badge}</div>
+                        </div>
+                        <div class="product-status">
+                            <span class="status-label">Status:</span>
+                            <div class="status-indicator status-${product.status}">
+                                <div class="status-dot"></div>
+                                <span class="status-text">${statusLabels[product.status]}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // If a product has a `link` property, wrap the card in an anchor so only that card becomes clickable.
+            if (product.link) {
+                return `<a class="product-link" href="${product.link}">${card}</a>`;
+            }
+
+            return card;
+        }
+
+        function renderProducts() {
+            const scpslsContainer = document.getElementById('scpsls-products');
+            const fnContainer = document.getElementById('fn-products');
+
+            scpslsContainer.innerHTML = products.scpsls.map(createProductCard).join('');
+            fnContainer.innerHTML = products.fn.map(createProductCard).join('');
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>

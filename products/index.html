@@ -452,6 +452,12 @@
 
         
         <div class="game-section">
+            <h2 class="game-title">Roblox</h2>
+            <div class="products-grid" id="roblox-products"></div>
+        </div>
+
+        
+        <div class="game-section">
             <h2 class="game-title">Other</h2>
             <div class="products-grid" id="fn-products"></div>
         </div>
@@ -463,6 +469,9 @@
                 { name: 'Elena Bypass', status: 'undetected', badge: 'SCPSL', color: 'purple', link: '/products/elenabypass' },
                 { name: 'ElenaEX', status: 'testing', badge: 'SCPSL', color: 'purple' },
                 { name: 'Elena Internal', status: 'testing', badge: 'SCPSL', color: 'pink' },
+            ],
+            roblox: [
+                { name: 'Elena ER', status: 'updating', badge: 'Roblox', color: 'green' }
             ],
             fn: [
                 { name: 'Elena Spoof', status: 'testing', badge: 'Other', color: 'blue' }
@@ -509,9 +518,11 @@
 
         function renderProducts() {
             const scpslsContainer = document.getElementById('scpsls-products');
+            const robloxContainer = document.getElementById('roblox-products');
             const fnContainer = document.getElementById('fn-products');
 
             scpslsContainer.innerHTML = products.scpsls.map(createProductCard).join('');
+            robloxContainer.innerHTML = products.roblox.map(createProductCard).join('');
             fnContainer.innerHTML = products.fn.map(createProductCard).join('');
         }
 
